@@ -1,0 +1,61 @@
+#logo_encabezado {
+    width: 60px;
+    float: left;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+div.encabezado{
+    align-items: center;
+    padding: 10px;
+    height: 70px;
+    display: flex;
+    background-color: #31353b;
+}
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #2b4756,#2E373C);
+    color: white;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+.datos{
+    width: 400px;
+    padding: 50px;
+    background-color: #06232f;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 5px;
+    box-shadow: 7px 13px 37px #000;
+}
+
+.completar,textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 16px;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    background: #424C52;
+    color:white;
+}
+
+.check{
+    margin-bottom: 16px;
+}
+.boton{
+    text-align: center;
+}
+button{
+    background: #FF5C00;
+    border-radius: 10px;
+    border:none;
+    cursor: pointer;
+    padding: 14px 26px;
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    width: 70%;
+    margin-top: 20px;
+}

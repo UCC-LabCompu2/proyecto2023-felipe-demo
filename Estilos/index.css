@@ -1,0 +1,48 @@
+#logo_encabezado {
+    width: 60px;
+    float: left;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+#llaves{
+    width: 700px;
+    padding: 50px;
+    justify-content: left;
+}
+body{
+    margin: 0;
+    background: linear-gradient(to right, #2b4756,#2E373C);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+}
+div.encabezado{
+    align-items: center;
+    padding: 10px;
+    height: 70px;
+    display: flex;
+    background-color: #31353b;
+}
+div.Introduccion{
+    display: flex;
+    align-items: center;
+}
+.texto{
+    padding: 130px;
+    text-align: center;
+    margin-bottom: 200px;
+    margin-right: 110px;
+}
+
+button{
+    background: #FF5C00;
+    border-radius: 10px;
+    border:none;
+    cursor: pointer;
+    padding: 14px 26px;
+    font-weight: bold;
+    font-size: 15px;
+    position: relative;
+    left: 1000px; bottom: 280px;
+    color: white;
+}
