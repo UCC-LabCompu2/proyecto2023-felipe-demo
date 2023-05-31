@@ -46,3 +46,9 @@ button{
     left: 1000px; bottom: 280px;
     color: white;
 }
+button:hover{
+    font-size: 0.8em;
+}
+button:active,button:visited{
+    color: white;
+}

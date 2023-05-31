@@ -1,0 +1,20 @@
+#logo_encabezado {
+    width: 60px;
+    float: left;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+div.encabezado{
+    align-items: center;
+    padding: 10px;
+    height: 70px;
+    display: flex;
+    background-color: #31353b;
+}
+body{
+    margin: 0;
+    background: linear-gradient(to right, #2b4756,#2E373C);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+}
