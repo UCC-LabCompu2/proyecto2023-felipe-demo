@@ -47,7 +47,7 @@ body{
 .boton{
     text-align: center;
 }
-button{
+.button{
     background: #FF5C00;
     border-radius: 10px;
     border:none;

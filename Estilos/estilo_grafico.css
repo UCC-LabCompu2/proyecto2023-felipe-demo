@@ -33,3 +33,9 @@ button{
     color: white;
     margin-top: 20px;
 }
+button:hover{
+    font-size: 0.8em;
+}
+button:active,button:visited{
+    color: white;
+}
