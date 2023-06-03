@@ -39,3 +39,7 @@ button:hover{
 button:active,button:visited{
     color: white;
 }
+.canvas{
+    text-align: center;
+    margin-top: 20px;
+}

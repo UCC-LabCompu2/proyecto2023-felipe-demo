@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../Estilos/estilo_grafico.css">
     <script type="text/javascript" src="Funciones.js"></script>
 </head>
-<body>
+<body onload="cargarLocalStorage()">
 <header>
     <div class="encabezado">
         <img id="logo_encabezado" src="../images/icono_torneos.png" alt="La imagen no cargo correctamente">
@@ -15,8 +15,9 @@
     </div>
 
 </header>
-<canvas class="myCanvas" id="myCanvas" width="1000" height="600" style="border:1px solid #d3d3d3;"></canvas>
-
+    <div class="canvas">
+    <canvas class="myCanvas" id="myCanvas" width="1000" height="600" style="border:1px solid #d3d3d3;"></canvas>
+    </div>
     <div class="boton">
         <a href="toma_de_datos.html">
             <button type="button"> Página Anterior </button>

@@ -28,14 +28,28 @@ function validacion(){
     window.open("grafico.html");
 }
 
-// primero usar localstorage para guardar los elementos de una pagina y llevarlos a la otra
-// despues usar for para ir poniendo los arreglos en orden y separados por una cierta cantidad de pixeles
-// ver uso de texto en canvas
+function guardarLocalStorage(){
+    var participantes = document.getElementById("participantes").value;
+    var guardar_participantes = participantes.split("\n");
+    localStorage.setItem("participantes_llaves", guardar_participantes);
+}
+function cargarLocalStorage(){
+    var participantes_guardados;
+    participantes_guardados = localStorage.getItem("participantes_llaves");
 
-// for (let i=0; i<renglon.lenght; i++){
+    document.getElementById("myCanvas").value = participantes_guardados;
 
- //}
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "12pt Arial";
+    ctx.fillStyle = "white";
 
+    ctx.fillText(participantes_guardados, 40, 40);
+}
+/*
+ for (let i=0; i<renglon.lenght; i++) {
+ }
+*/
 
 
 
