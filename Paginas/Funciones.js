@@ -3,16 +3,16 @@
  * Verificar que los campos no queden vacios antes de ir a la otra pagina.
  */
 
-function validacion(){
+function validacion() {
     var nombretorneo = document.getElementById("nombre del torneo").value;
     var participantes = document.getElementById("participantes").value;
     var juego = document.getElementById("Juego/Deporte").value;
 
-    if (nombretorneo === ""){
+    if (nombretorneo === "") {
         alert("Por favor, escribe el nombre del torneo");
         return false;
     }
-    if(participantes.trim() === ""){
+    if (participantes.trim() === "") {
         alert("Por favor, escribe los participantes");
         return false;
     }
@@ -20,39 +20,55 @@ function validacion(){
     if (renglon.length % 2 !== 0) {
         alert("El número de Participantes debe ser par.");
         return false;
+    }else{
+        localStorage.setItem("participantes", renglon);
+        localStorage.setItem("renglon", JSON.stringify(renglon));
     }
-    if (juego === ""){
+    if (juego === "") {
         alert("Por favor, escribe el Juego/Deporte");
         return false;
     }
     window.open("grafico.html");
 }
 
-function guardarLocalStorage(){
-    var participantes = document.getElementById("participantes").value;
-    var guardar_participantes = participantes.split("\n");
-    localStorage.setItem("participantes_llaves", guardar_participantes);
-}
-function cargarLocalStorage(){
-    var participantes_guardados;
-    participantes_guardados = localStorage.getItem("participantes_llaves");
+/**
+ * Funcion que dibuje los participantes del torneo ordenadamente, en
+ * parejas de dos y separados para que se entiendan los enfrentamientos
+ */
+function dibujarNombres(){
+    let participantes = localStorage.getItem("participantes");
+    var arreglo_participantes = JSON.parse(localStorage.getItem("renglon"));
 
-    document.getElementById("myCanvas").value = participantes_guardados;
+    console.log(arreglo_participantes);
+    console.log(arreglo_participantes.length);
 
-    var canvas = document.getElementById("myCanvas");
+    const canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
-    ctx.font = "12pt Arial";
+    canvas.width = 1000;                                                     // Declare el tamaño del canvas aca porque sino se me cortaba el texto cuando habia muchos participantes
+    canvas.height = 600;
+    ctx.font = "15pt Open Sans";
     ctx.fillStyle = "white";
 
-    ctx.fillText(participantes_guardados, 40, 40);
+    const elementHeight = 10;
+    const elementSpacing = 15;
+    const groupSpacing = 50;
+    const x = 60;
+    let y = 60;
+
+    for (let j = 0; j < arreglo_participantes.length; j+= 2){
+        const ordenar = arreglo_participantes[j];
+        const ordenar_parejas = arreglo_participantes[j + 1];
+
+        ctx.fillText(ordenar, x , y);
+
+        if (ordenar_parejas !== undefined && ordenar_parejas !== ordenar){
+            ctx.fillText(ordenar_parejas, x , y + elementHeight + elementSpacing);
+        }
+            y += (elementHeight + elementSpacing) * 2 + groupSpacing;            // Actualiza la posicion para el siguiente elemento para
+                                                                                 // que aparezca cada participante debajo del otro
+        if (ordenar_parejas === undefined || ordenar_parejas === ordenar){
+            y+= elementHeight + elementSpacing;
+        }
+    }
 }
-/*
- for (let i=0; i<renglon.lenght; i++) {
- }
-*/
-
-
-
-
-
 
