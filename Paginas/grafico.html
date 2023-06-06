@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title> Generador de Llaves de Torneo</title>
@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="../Estilos/estilo_grafico.css">
     <script type="text/javascript" src="Funciones.js"></script>
 </head>
-<body onload="dibujarNombres()">
+<body onload="dibujarParticipantes(); onload=mostrarDatos()">
 
 <header>
     <div class="encabezado">
         <img id="logo_encabezado" src="../images/icono_torneos.png" alt="La imagen no cargo correctamente">
-        <h1> Generador de Llaves de Torneo </h1>
+        <p class="emojis">&#x1f3c6;&#xfe0e;</p><p class="mostrar_datos" id="mostrarnombre"></p>
+        <p class="emojis"> &#x1f3ae;&#xfe0e;</p><p class="mostrar_datos" id="mostrarjuego"></p>
+        <p class="emojis"> &#128100;</p><p class="mostrar_datos" id="mostrar_cant"></p>
     </div>
 </header>
 
