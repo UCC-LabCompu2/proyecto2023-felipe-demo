@@ -92,7 +92,7 @@ function dibujarParticipantes() {
 
 /* Empece a ver como ordenar los participantes para que en los emparejamientos toque el primero que se ingrese
    (supuestamente seria el mejor) con el ultimo (seria el peor), el segundo con el penultimo, y asi. Esto para
-   que sea un formato de torneo como por ejemplo el de la NBA.
+   que sea un formato de torneo como por ejemplo el de la NBA. No pude todavia adaptarlo a lo anterior.
 
 
 const n = arreglo_participantes.length;  // Obtener la longitud del arreglo
