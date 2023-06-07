@@ -3,9 +3,9 @@
  * Verificar que los campos no queden vacios antes de ir a la siguiente pagina.
  */
 function validacion() {
-    var nombretorneo = document.getElementById("nombre del torneo").value;
-    var participantes = document.getElementById("participantes").value;
-    var juego = document.getElementById("Juego/Deporte").value;
+    let nombretorneo = document.getElementById("nombre del torneo").value;
+    let participantes = document.getElementById("participantes").value;
+    let juego = document.getElementById("Juego/Deporte").value;
 
     if (nombretorneo === "") {
         alert("Por favor, escribe el nombre del torneo");                       //Si se deja en blanco el input, salta la alerta
@@ -93,6 +93,7 @@ function dibujarParticipantes() {
 /* Empece a ver como ordenar los participantes para que en los emparejamientos toque el primero que se ingrese
    (supuestamente seria el mejor) con el ultimo (seria el peor), el segundo con el penultimo, y asi. Esto para
    que sea un formato de torneo como por ejemplo el de la NBA. No pude todavia adaptarlo a lo anterior.
+   Si lo pruebo debajo del For los elementos se muestran como yo quiero.
 
 
 const n = arreglo_participantes.length;  // Obtener la longitud del arreglo
