@@ -48,25 +48,28 @@ body{
     margin-bottom: 16px;
 }
 .boton{
-    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
 }
-.button{
+
+.button {
     background: #FF5C00;
     border-radius: 10px;
-    border:none;
+    border: none;
     cursor: pointer;
     padding: 14px 26px;
     font-weight: bold;
     font-size: 15px;
     color: white;
-    width: 70%;
-    margin-top: 20px;
+    width: 120%;
     transition: transform 0.2s ease;
 }
-.button:hover{
+
+.button:hover {
     transform: scale(0.95);
 }
-.button:active,
-.button:visited{
+
+.button:active, .button:visited {
     color: white;
 }
