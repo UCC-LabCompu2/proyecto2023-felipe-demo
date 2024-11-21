@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>En esta pagina se mostrara el grafico generado con los datos previamente cargados por el usuario</title>
-    <link rel="icon" type="image/png" href="../favicon.ico">
+    <title>Generador de Llaves de Torneo</title>
+    <link rel="icon" type="image/png" href="../images/faviconn.ico">
+    <link rel="stylesheet" href="../Estilos/estilo_grafico.css">
+    <script src="funciones.js"></script>
 </head>
-<body>
-      <canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;">
-      </canvas>
+<body onload="dibujarBracket(); mostrarDatos()">
+<header>
+    <div class="encabezado">
+        <img id="logo_encabezado" src="../images/icono_torneos.png" alt="Logo del torneo">
+        <p class="emojis">&#x1f3c6;&#xfe0e;</p>
+        <p class="mostrar_datos" id="mostrarnombre"></p>
+        <p class="emojis">&#x1f3ae;&#xfe0e;</p>
+        <p class="mostrar_datos" id="mostrarjuego"></p>
+        <p class="emojis">&#128100;</p>
+        <p class="mostrar_datos" id="mostrar_cant"></p>
+    </div>
+</header>
+
+<main>
+    <div class="canvas">
+        <canvas id="myCanvas"></canvas>
+    </div>
+    <div class="boton">
+        <a href="toma_de_datos.html">
+            <button type="button">Página Anterior</button>
+        </a>
+        <a href="../index.html">
+            <button type="button">Home</button>
+        </a>
+    </div>
+</main>
 </body>
 </html>

@@ -1,47 +1,58 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Generador de Llaves de Torneo</title>
-        <meta content="Felipe Demo" name="Author">
-        <meta content="Toma de datos del usuario para la generacion de las llaves" name="Description">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png" href="../favicon.ico">
-        <link rel="stylesheet" href="../Estilos/estilo_toma_de_datos.css" type="text/css">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Llaves de Torneo</title>
+    <meta content="Felipe Demo" name="Author">
+    <meta content="Toma de datos del usuario para la generacion de las llaves" name="Description">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Estilos/estilo_toma_de_datos.css" type="text/css">
+    <script type="text/javascript" src="funciones.js"></script>
+    <link rel="icon" type="image/png" href="../images/faviconn.ico">
 
-    </head>
-    <body>
-                <div class="encabezado">
-                    <img id="logo_encabezado" src="../images/icono_torneos.png">
-                    <h1> Generador de Llaves de Torneo </h1>
-                </div>
-        <section class="datos">
+</head>
+<body>
 
-                <div>
-                    Nombre del Torneo: <input class="completar" type="text" name="nombre del torneo">
-                </div>
-                <div>
-                    Participantes/Equipos:
-                    <ul>
-                        <li> uno por linea </li>
-                        <li> ordenado de mejor a peor </li>
-                    </ul>
-                </div>
-                <div>
-                    <textarea name="participantes" rows="15" cols="30"> </textarea>
-                </div>
-                <div>
-                    <input class="check" type="checkbox" name="aleatorio" value="generacion aleatoria"> seleccion aleatoria
-                </div>
-                <div>
-                    Juego/Deporte: <input class="completar" type="text" name="juego">
-                </div>
-                <div class="boton">
-                    <a href="grafico.html"> <button type="button"> ¡Generar! </button> </a>
-                </div>
+<header>
+    <div class="encabezado">
+        <img id="logo_encabezado" src="../images/icono_torneos.png" alt="La imagen no cargo correctamente">
+        <h2> Generador de Llaves de Torneo </h2>
+    </div>
+</header>
 
-        </section>
-    </body>
-    </html>
+<section class="datos" onsubmit="return validacion()">
+
+    <div>
+        <label for="nombre del torneo">Nombre del Torneo:</label>
+        <input class="completar" type="text" name="nombre del torneo" id="nombre del torneo">
+    </div>
+    <div>
+        Participantes/Equipos:
+        <ul>
+            <li> uno por línea</li>
+            <li> ordenado de mejor a peor</li>
+            <li> números pares</li>
+        </ul>
+    </div>
+    <div>
+        <textarea class="textarea" name="texto" id="participantes" rows="15" cols="30"></textarea>
+    </div>
+    <div>
+        <label for="generacion aleatoria"> </label>
+        <input class="check" type="checkbox" name="aleatorio" value="generacion aleatoria" id="generacion aleatoria">
+        selección aleatoria
+    </div>
+    <div>
+        <label for="Juego/Deporte"> Juego/Deporte: </label>
+        <input class="completar" type="text" name="juego" id="Juego/Deporte">
+    </div>
+    <div class="boton">
+        <button class="button" type="button" onclick="validacion()">¡Generar!</button>
+    </div>
+
+</section>
+
+</body>
+</html>

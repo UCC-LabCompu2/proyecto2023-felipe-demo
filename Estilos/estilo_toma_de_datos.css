@@ -2,12 +2,13 @@
     width: 60px;
     float: left;
     border-radius: 50%;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 30px;
 }
 div.encabezado{
     align-items: center;
     padding: 10px;
-    height: 70px;
+    height: 80px;
     display: flex;
     background-color: #31353b;
 }
@@ -40,14 +41,16 @@ body{
     background: #424C52;
     color:white;
 }
-
+.textarea{
+    font-family: 'Open Sans', sans-serif;
+}
 .check{
     margin-bottom: 16px;
 }
 .boton{
     text-align: center;
 }
-button{
+.button{
     background: #FF5C00;
     border-radius: 10px;
     border:none;
@@ -58,4 +61,12 @@ button{
     color: white;
     width: 70%;
     margin-top: 20px;
+    transition: transform 0.2s ease;
+}
+.button:hover{
+    transform: scale(0.95);
+}
+.button:active,
+.button:visited{
+    color: white;
 }
