@@ -8,4 +8,4 @@ La página se basa en la creación de llaves de torneo para cualquier uso que le
 
 link gh pages: [Proyecto](https://ucc-labcompu2.github.io/proyecto2023-felipe-demo/)
 
-Tecnologías usadas: HTML, CSS.
+Tecnologías usadas: HTML, CSS, Javascipt.
