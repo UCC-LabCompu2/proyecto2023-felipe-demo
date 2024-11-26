@@ -1,13 +1,24 @@
-function mostrarDatos() {
-    let mostrar_nombretorneo = localStorage.getItem("nombretorneo");
-    let mostrar_juego = localStorage.getItem("juego");
-    let mostrar_cantidadparticipantes = JSON.parse(localStorage.getItem("renglon"));
+f// Función para limpiar localStorage y guardar nuevos datos
+function guardarDatosTorneo(nombretorneo, participantes, juego, generacionAleatoria) {
+    localStorage.clear();
 
-    document.getElementById("mostrarnombre").innerHTML = mostrar_nombretorneo;
-    document.getElementById("mostrarjuego").innerHTML = mostrar_juego;
-    document.getElementById("mostrar_cant").innerHTML = mostrar_cantidadparticipantes.length;
+    let pairedParticipants = generacionAleatoria ? generarCrucesAleatorios(participantes) : generarCruces(participantes);
+
+    let datos = {
+        nombretorneo: nombretorneo,
+        renglon: pairedParticipants,
+        juego: juego,
+        timestamp: new Date().getTime()
+    };
+
+    localStorage.setItem("datosTorneo", JSON.stringify(datos));
 }
 
+
+/**
+ * Funcion de validacion
+ * Verificar que los campos no queden vacios antes de ir a la siguiente pagina.
+ */
 function validacion() {
     let nombretorneo = document.getElementById("nombre del torneo").value;
     let participantes = document.getElementById("participantes").value;
@@ -17,27 +28,26 @@ function validacion() {
     if (nombretorneo === "") {
         alert("Por favor, escribe el nombre del torneo");
         return false;
-    } else {
-        localStorage.setItem("nombretorneo", nombretorneo);
     }
+
     if (participantes.trim() === "") {
         alert("Por favor, escribe los participantes");
         return false;
     }
-    const renglon = participantes.split("\n").filter(p => p.trim() !== "");
+
+    const renglon = participantes.split("\n");
     if (renglon.length % 2 !== 0) {
         alert("El número de Participantes debe ser par.");
         return false;
-    } else {
-        let pairedParticipants = generacionAleatoria ? generarCrucesAleatorios(renglon) : generarCruces(renglon);
-        localStorage.setItem("renglon", JSON.stringify(pairedParticipants));
     }
+
     if (juego === "") {
         alert("Por favor, escribe el Juego/Deporte");
         return false;
-    } else {
-        localStorage.setItem("juego", juego);
     }
+
+    // Guardar datos si todas las validaciones pasan
+    guardarDatosTorneo(nombretorneo, renglon, juego, generacionAleatoria);
 
     // Redirigir a grafico.html
     window.location.href = "grafico.html";
@@ -63,6 +73,32 @@ function generarCrucesAleatorios(participantes) {
     return shuffled;
 }
 
+/*
+ * Funcion para mostrar los datos ingresados por el usuario en el encabezado de la pagina.
+ * Se mostrará el nombre del torneo, el juego/deporte y la cantidad de participantes.
+ */
+function mostrarDatos() {
+    let datosString = localStorage.getItem("datosTorneo");
+    if (datosString) {
+        let datos = JSON.parse(datosString);
+        let ahora = new Date().getTime();
+
+        // Verificar si los datos tienen menos de 5 minutos de antigüedad
+        if (ahora - datos.timestamp < 5 * 1000) {
+            document.getElementById("mostrarnombre").innerHTML = datos.nombretorneo;
+            document.getElementById("mostrarjuego").innerHTML = datos.juego;
+            document.getElementById("mostrar_cant").innerHTML = datos.renglon.length;
+        } else {
+            alert("Los datos del torneo han expirado. Por favor, vuelve a ingresar la información.");
+            window.location.href = "toma_de_datos.html"; // Redirigir a la página del formulario
+        }
+    } else {
+        alert("No se encontraron datos del torneo. Por favor, ingresa la información del torneo.");
+        window.location.href = "toma_de_datos.html"; // Redirigir a la página del formulario
+    }
+
+}
+
 function dibujarBracket() {
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
@@ -79,7 +115,9 @@ function dibujarBracket() {
     ctx.fillStyle = "white";
     ctx.font = "bold 24px 'Open Sans'";
     ctx.textAlign = "center";
-    const nombreTorneo = localStorage.getItem("nombretorneo") || "Nombre del torneo";
+    const datosString = localStorage.getItem("datosTorneo");
+    const datos = datosString ? JSON.parse(datosString) : {};
+    const nombreTorneo = datos.nombretorneo || "Nombre del torneo";
     ctx.fillText(nombreTorneo, canvas.width / 2, 50);
 
     function drawBracket(x, y, width, height, text, isFinal = false) {
@@ -140,7 +178,7 @@ function dibujarBracket() {
     const verticalGap = 30;
 
     // Obtener participantes
-    const participants = JSON.parse(localStorage.getItem("renglon")) || [];
+    const participants = datos.renglon || [];
 
     // Calcular posición inicial
     const startX = 50;
@@ -184,22 +222,22 @@ function dibujarBracket() {
 
     // Conectar semifinales con la final
     const semiY1 = startY + bracketHeight/2;
-    const semiY2 = startY + (participants.length/2 - 0.2) * (bracketHeight + verticalGap) + bracketHeight/2;
+    const semiY2 = startY + (participants.length/2 - 0.2) * (bracketHeight + verticalGap);
 
     drawConnection(
         startX + bracketWidth + horizontalGap + bracketWidth,
-        semiY1 + bracketHeight,
-        finalX, finalY + bracketHeight/2
+        semiY1 + bracketHeight/1.5,
+        finalX,finalY + bracketHeight/2
     );
     drawConnection(
         startX + bracketWidth + horizontalGap + bracketWidth,
-        semiY2 + bracketHeight,
+        semiY2 + bracketHeight * 1.5,
         finalX,
         finalY + bracketHeight/2
     );
 }
 
-// Asegúrate de que dibujarBracket() se llame cuando se cargue la página de gráfico
+//Se llaman cuando se cargue la página de gráfico
 window.onload = function() {
     mostrarDatos();
     dibujarBracket();
@@ -209,96 +247,39 @@ window.onload = function() {
 
 
 /*
-/**
- * Funcion de validacion
- * Verificar que los campos no queden vacios antes de ir a la siguiente pagina.
- */
-/*
-function validacion() {
-    let nombretorneo = document.getElementById("nombre del torneo").value;
-    let participantes = document.getElementById("participantes").value;
-    let juego = document.getElementById("Juego/Deporte").value;
 
     if (nombretorneo === "") {
         alert("Por favor, escribe el nombre del torneo");                       //Si se deja en blanco el input, salta la alerta
         return false;
     } else {
         localStorage.setItem("nombretorneo", nombretorneo);                     //Si se escribe algo, se setea en LocalStorage para luego ser usado
-    }
+
     if (participantes.trim() === "") {                                         //?? //.trim elimina los espacios en blanco del final de los strings
-        alert("Por favor, escribe los participantes");
-        return false;
-    }
+
     const renglon = participantes.split("\n");                                //.split() divide un String en un Array y con \n hago que se salte una linea, asi cada linea es un elemento del array
     if (renglon.length % 2 !== 0) {                                         //Verifico que se haya escrito un numero de participantes par
         alert("El número de Participantes debe ser par.");
-        return false;
-    } else {
-        localStorage.setItem("renglon", JSON.stringify(renglon));
-    }
-    if (juego === "") {
-        alert("Por favor, escribe el Juego/Deporte");
-        return false;
-    } else {
-        localStorage.setItem("juego", juego);
-    }
+
 
     window.open("grafico.html");                                      //Si se cumplieron todas las condiciones, se pasa de pagina
 }
-/**
- /*
- * Funcion para mostrar los datos ingresados por el usuario en el encabezado de la pagina.
- * Se mostrará el nombre del torneo, el juego/deporte y la cantidad de participantes.
  */
 /*
 function mostrarDatos() {
     let mostrar_nombretorneo = localStorage.getItem("nombretorneo");              //creo variables para guardar los datos ingresados en el formulario de toma_de_datos.html
     let mostrar_juego = localStorage.getItem("juego");
-    let mostrar_cantidadparticipantes = JSON.parse(localStorage.getItem("renglon"));
 
-    document.getElementById("mostrarnombre").innerHTML = mostrar_nombretorneo;
-    document.getElementById("mostrarjuego").innerHTML = mostrar_juego;
-    document.getElementById("mostrar_cant").innerHTML = mostrar_cantidadparticipantes.length;
-}
-
-/**
- * Funcion que dibuje los participantes del torneo ordenadamente, en
- * parejas de dos y separados para que se entiendan los enfrentamientos
- */
-/*
-function dibujarParticipantes() {
 
     let arreglo_participantes = JSON.parse(localStorage.getItem("renglon"));        //Uso JSON.parse para obtener el arreglo con los participantes
 
-    console.log(arreglo_participantes);
-    console.log(arreglo_participantes.length);
-
-    const canvas = document.getElementById("myCanvas");
-    const ctx = canvas.getContext("2d");
     canvas.width = 900;                                                     // Declare el tamaño del canvas acá porque si no se me cortaba el texto cuando había muchos participantes
-    canvas.height = 500;
-    ctx.font = "15pt Open Sans";
-    ctx.fillStyle = "white";
-    const elementHeight = 10;
-    const elementSpacing = 15;
-    const groupSpacing = 40;
-    const x = 50;
-    let y = 50;
+
 
     for (let j = 0; j < arreglo_participantes.length; j += 2) {                   //For para ordenar de a pares los participantes
-        const ordenar = arreglo_participantes[j];
-        const ordenar_parejas = arreglo_participantes[j + 1];
-
-        ctx.fillText(ordenar, x, y);
 
         if (ordenar_parejas !== undefined && ordenar_parejas !== ordenar) {                  //En caso de que el participante este definido y sea distinto al anterior, se escribe en el canvas
             ctx.fillText(ordenar_parejas, x, y + elementHeight + elementSpacing);
         }
         y += (elementHeight + elementSpacing) * 2 + groupSpacing;                    // Actualiza la posicion del siguiente elemento para
                                                                                      // que aparezca cada participante debajo del otro
-        if (ordenar_parejas === undefined || ordenar_parejas === ordenar) {
-            y += elementHeight + elementSpacing;
-        }
-    }
-}
  */
