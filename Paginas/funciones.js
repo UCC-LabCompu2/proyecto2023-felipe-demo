@@ -1,20 +1,3 @@
-f// Función para limpiar localStorage y guardar nuevos datos
-function guardarDatosTorneo(nombretorneo, participantes, juego, generacionAleatoria) {
-    localStorage.clear();
-
-    let pairedParticipants = generacionAleatoria ? generarCrucesAleatorios(participantes) : generarCruces(participantes);
-
-    let datos = {
-        nombretorneo: nombretorneo,
-        renglon: pairedParticipants,
-        juego: juego,
-        timestamp: new Date().getTime()
-    };
-
-    localStorage.setItem("datosTorneo", JSON.stringify(datos));
-}
-
-
 /**
  * Funcion de validacion
  * Verificar que los campos no queden vacios antes de ir a la siguiente pagina.
@@ -71,6 +54,22 @@ function generarCrucesAleatorios(participantes) {
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     return shuffled;
+}
+
+f// Función para limpiar localStorage y guardar nuevos datos
+function guardarDatosTorneo(nombretorneo, participantes, juego, generacionAleatoria) {
+    localStorage.clear();
+
+    let pairedParticipants = generacionAleatoria ? generarCrucesAleatorios(participantes) : generarCruces(participantes);
+
+    let datos = {
+        nombretorneo: nombretorneo,
+        renglon: pairedParticipants,
+        juego: juego,
+        timestamp: new Date().getTime()
+    };
+
+    localStorage.setItem("datosTorneo", JSON.stringify(datos));
 }
 
 /*
@@ -154,7 +153,7 @@ function dibujarBracket() {
         }
     }
 
-    function drawConnection(startX, startY, endX, endY) {
+    function dibujarConexion(startX, startY, endX, endY) {
         ctx.strokeStyle = "#4A5A67";
         ctx.lineWidth = 2;
         ctx.beginPath();
@@ -201,13 +200,13 @@ function dibujarBracket() {
         drawBracket(nextX, nextY, bracketWidth, bracketHeight);
 
         // Dibujar conexiones
-        drawConnection(
+        dibujarConexion(
             startX + bracketWidth,
             y1 + bracketHeight/2,
             nextX,
             nextY + bracketHeight/2
         );
-        drawConnection(
+        dibujarConexion(
             startX + bracketWidth,
             y2 + bracketHeight/2,
             nextX,
@@ -224,12 +223,12 @@ function dibujarBracket() {
     const semiY1 = startY + bracketHeight/2;
     const semiY2 = startY + (participants.length/2 - 0.2) * (bracketHeight + verticalGap);
 
-    drawConnection(
+    dibujarConexion(
         startX + bracketWidth + horizontalGap + bracketWidth,
         semiY1 + bracketHeight/1.5,
         finalX,finalY + bracketHeight/2
     );
-    drawConnection(
+    dibujarConexion(
         startX + bracketWidth + horizontalGap + bracketWidth,
         semiY2 + bracketHeight * 1.5,
         finalX,
@@ -241,45 +240,21 @@ function dibujarBracket() {
 window.onload = function() {
     mostrarDatos();
     dibujarBracket();
+    AnimacionTrofeo();
 };
 
+//Animacion del trofeo
+function AnimacionTrofeo() {
+    // Obtener la imagen del trofeo
+    const trophyImage = document.querySelector('.trofeo');
 
+    // Agregar la animación al evento "mouseover"
+    trophyImage.addEventListener('mouseover', () => {
+        trophyImage.classList.add('animate');
+    });
 
-
-/*
-
-    if (nombretorneo === "") {
-        alert("Por favor, escribe el nombre del torneo");                       //Si se deja en blanco el input, salta la alerta
-        return false;
-    } else {
-        localStorage.setItem("nombretorneo", nombretorneo);                     //Si se escribe algo, se setea en LocalStorage para luego ser usado
-
-    if (participantes.trim() === "") {                                         //?? //.trim elimina los espacios en blanco del final de los strings
-
-    const renglon = participantes.split("\n");                                //.split() divide un String en un Array y con \n hago que se salte una linea, asi cada linea es un elemento del array
-    if (renglon.length % 2 !== 0) {                                         //Verifico que se haya escrito un numero de participantes par
-        alert("El número de Participantes debe ser par.");
-
-
-    window.open("grafico.html");                                      //Si se cumplieron todas las condiciones, se pasa de pagina
+    // Remover la animación al evento "mouseout"
+    trophyImage.addEventListener('mouseout', () => {
+        trophyImage.classList.remove('animate');
+    });
 }
- */
-/*
-function mostrarDatos() {
-    let mostrar_nombretorneo = localStorage.getItem("nombretorneo");              //creo variables para guardar los datos ingresados en el formulario de toma_de_datos.html
-    let mostrar_juego = localStorage.getItem("juego");
-
-
-    let arreglo_participantes = JSON.parse(localStorage.getItem("renglon"));        //Uso JSON.parse para obtener el arreglo con los participantes
-
-    canvas.width = 900;                                                     // Declare el tamaño del canvas acá porque si no se me cortaba el texto cuando había muchos participantes
-
-
-    for (let j = 0; j < arreglo_participantes.length; j += 2) {                   //For para ordenar de a pares los participantes
-
-        if (ordenar_parejas !== undefined && ordenar_parejas !== ordenar) {                  //En caso de que el participante este definido y sea distinto al anterior, se escribe en el canvas
-            ctx.fillText(ordenar_parejas, x, y + elementHeight + elementSpacing);
-        }
-        y += (elementHeight + elementSpacing) * 2 + groupSpacing;                    // Actualiza la posicion del siguiente elemento para
-                                                                                     // que aparezca cada participante debajo del otro
- */

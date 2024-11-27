@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Generador de Llaves de Torneo</title>
-    <link rel="icon" type="image/png" href="../images/faviconn.ico">
-    <link rel="stylesheet" href="../Estilos/estilo_grafico.css">
+    <link rel="icon" type="image/png" href="../favicon.ico">
+    <link rel="stylesheet" href="../Estilos/estilos.css">
     <script src="funciones.js"></script>
 </head>
-<body onload="dibujarBracket(); mostrarDatos()">
+<body onload="dibujarBracket(); mostrarDatos(); AnimacionTrofeo()">
 <header>
     <div class="encabezado">
         <img id="logo_encabezado" src="../images/icono_torneos.png" alt="Logo del torneo">
@@ -23,7 +23,11 @@
 <main>
     <div class="canvas">
         <canvas id="myCanvas"></canvas>
+        <div class="trofeo">
+            <img id="imagen_trofeo" src="../images/trofeo.jpg" alt="Trofeo">
+        </div>
     </div>
+
     <div class="boton">
         <a href="toma_de_datos.html">
             <button type="button">Página Anterior</button>
